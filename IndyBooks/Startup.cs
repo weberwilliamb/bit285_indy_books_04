@@ -45,9 +45,9 @@ namespace IndyBooks
             {
                 routes.MapRoute("Default",
                     "{controller=Admin}/{action=Search}");
-            }
-);
+            });
 
+            app.UseStaticFiles();
         }
     }
 }

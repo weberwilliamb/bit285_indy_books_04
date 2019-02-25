@@ -29,7 +29,8 @@ namespace IndyBooks.Migrations
 
                     b.Property<string>("Edition");
 
-                    b.Property<decimal>("Price");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .IsRequired();

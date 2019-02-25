@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IndyBooks.Models.Book>
+@{
+    ViewBag.Title = "Admin Search";
+    Layout = "_Layout";
+}
+
+<h3>Search Result</h3>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Edition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+    </tr>
+
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>
+                @book.Title
+            </td>
+            <td>
+                @book.Author
+            </td>
+            <td class="rightedge">
+                @book.Edition
+            </td>
+            <td class="rightedge">
+                $@book.Price
+            </td>
+            <td class="rightedge">
+                @book.Year
+            </td>
+        </tr>
+    }
+
+</table>
+
+

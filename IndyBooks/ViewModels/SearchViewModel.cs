@@ -1,5 +1,5 @@
 ﻿using System;
-namespace IndyBooks.ViewModel
+namespace IndyBooks.ViewModels
 {
     public class SearchViewModel
     {

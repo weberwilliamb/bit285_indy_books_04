@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IndyBooks.Models;
+using IndyBooks.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IndyBooks.Controllers
@@ -18,24 +19,24 @@ namespace IndyBooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(Book searchBook)
+        public ActionResult Search(SearchViewModel search)
         {
             IQueryable<Book> foundBooks = _db.Books; // start with entire collection
 
             //Return all books, if the search is empty
-            if (searchBook == null)
+            if (search == null)
             {
                 return View("SearchResults", foundBooks);
             }
 
             //Otherwise, check each field and modify the collection accordingly
-            if (searchBook.Title != null)
+            if (search.Title != null)
             {
                 //Filter the collection by Title which "contains" string 
                 //(Note: searchBook is the info from the form)
                 // TODO: order the results by Title
                 foundBooks = foundBooks
-                             .Where(b => b.Title.Contains(searchBook.Title));
+                             .Where(b => b.Title.Contains(search.Title));
             }
 
             //TODO: Add logic to filter the collection by last part of the Author's Name, if given

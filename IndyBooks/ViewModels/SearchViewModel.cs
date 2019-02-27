@@ -5,6 +5,11 @@ namespace IndyBooks.ViewModels
     {
         public String Title { get; set; }
 
-        //TODO: Add properties needed for searching
+        //Add properties needed for searching
+
+        public String AuthorLastName { get; set; }
+        public decimal MinPrice { get; set; }
+        public decimal MaxPrice { get; set; }
+
     }
 }

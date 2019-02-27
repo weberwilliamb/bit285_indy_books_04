@@ -20,7 +20,7 @@ namespace IndyBooks.Controllers
         [HttpPost]
         public ActionResult Search(Book searchBook)
         {
-            IEnumerable<Book> foundBooks = _db.Books; // start with entire collection
+            IQueryable<Book> foundBooks = _db.Books; // start with entire collection
 
             //Return all books, if the search is empty
             if (searchBook == null)
@@ -38,15 +38,12 @@ namespace IndyBooks.Controllers
                              .Where(b => b.Title.Contains(searchBook.Title));
             }
 
-            //TODO: add logic to filter the collection by Author info, if given 
-            // (Note: you will need to adjust the View to add a search field)
+            //TODO: Add logic to filter the collection by last part of the Author's Name, if given
+            // (HINT: consider the EndsWith() method, also you will need to adjust the View and ViewModel)
 
-            //TODO: add logic to filter the collection by the Edition number, if given
-            // (Note: you will need to adjust the View to add a search field)
-
-            //TODO: add logic to filter the collection by price below the price info, if given
+            //TODO: Filter the collection by price between a low and high value, if given
             //       order results by descending price 
-            // (Note: you will need to adjust the View to add a search field)
+            // (Note: you will need to adjust the ViewModel and View to add search fields)
 
             return View("SearchResults", foundBooks);
         }

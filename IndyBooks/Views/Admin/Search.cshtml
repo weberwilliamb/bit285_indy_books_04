@@ -1,4 +1,4 @@
-﻿@model IndyBooks.Models.Book
+﻿@model IndyBooks.ViewModel.SearchViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_Layout";
@@ -7,10 +7,9 @@
 <h3>Find Books</h3>
 <form asp-action="Search" asp-controller="Admin">
     <div>
-        <label asp-for="Title"></label>
-        <input asp-for="Title" />
+        Title to Find: <input asp-for="Title" />
     </div>
-
+    <!-- TODO: Add fields needed for seraching -->
     <div>
         <input type="submit" value="Search"/>
     </div>

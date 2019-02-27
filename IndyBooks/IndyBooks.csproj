@@ -17,6 +17,7 @@
     <Folder Include="Views\Admin\" />
     <Folder Include="wwwroot\" />
     <Folder Include="Controllers\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="appsettings.Development.json" />

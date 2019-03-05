@@ -12,7 +12,7 @@ namespace IndyBooks.Models
         public decimal Price { get; set; }
 
         //TODO: Add Navigtion Property according to ERD Diagram
-
+        public Writer Author { get; set; }
 
     }
 }

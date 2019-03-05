@@ -10,8 +10,9 @@ namespace IndyBooks.Models
             Database.EnsureCreated();
         }
 
-        //TODO: Define DbSets for Collections representing DB tables
+        //Define DbSets for Collections representing DB tables
         public DbSet<Book> Books { get; set; }
+        public DbSet<Writer> Writers { get; set; }
 
         // Used to fine tune certain aspects of the Data model
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -13,8 +13,8 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            <!-- TODO: Update to use the Name property of the Book's Author entity-->
-            @Html.DisplayNameFor(model => model.Author)
+            <!-- Use the Name property of the Book's Author entity-->
+            @Html.DisplayNameFor(model => model.Author.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SKU)
@@ -31,8 +31,8 @@
                 @book.Title
             </td>
             <td>
-                <!-- TODO: Update to use the Name property of the Book's Author entity-->
-                @book.Author
+                <!-- Use the Name property of the Book's Author entity-->
+                @book.Author.Name
             </td>
             <td class="rightedge">
                 @book.SKU

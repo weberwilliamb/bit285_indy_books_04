@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IndyBooks.Models;
 using IndyBooks.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IndyBooks.Controllers
 {
@@ -38,6 +39,7 @@ namespace IndyBooks.Controllers
             // (HINT: consider the EndsWith() method, also you will need to adjust the View and ViewModel)
             if (search.AuthorLastName != null)
             {
+                //TODO:Update to use the Name property of the Book's Author entity
                 foundBooks = foundBooks
                         .Where(b => b.Author.EndsWith(search.AuthorLastName, StringComparison.CurrentCulture));
             }

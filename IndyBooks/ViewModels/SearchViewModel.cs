@@ -5,7 +5,9 @@ namespace IndyBooks.ViewModels
     {
         public String Title { get; set; }
 
-        //Add properties needed for searching
+        //Properties needed for searching
+        //TODO : Notice how the ViewModel doesn't need any changes
+        //        since it only deals with the Search view
 
         public String AuthorLastName { get; set; }
         public decimal MinPrice { get; set; }

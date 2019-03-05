@@ -22,37 +22,43 @@ namespace IndyBooks.Controllers
         [HttpPost]
         public ActionResult Search(SearchViewModel search)
         {
+            //Full Collection Search
             IQueryable<Book> foundBooks = _db.Books; // start with entire collection
 
-            //Filter collection using each non-empty Field as noted
+            //Partial Title Search
             if (search.Title != null)
             {
-                //Filter the collection by Title which "contains" string 
-                //(Note: searchBook is the info from the form)
-                // Order the results by Title
                 foundBooks = foundBooks
                              .Where(b => b.Title.Contains(search.Title))
-                             .OrderBy(b => b.Title);
+                             .OrderBy(b => b.Title)
+                             ;
             }
 
-            //Add logic to filter the collection by last part of the Author's Name, if given
-            // (HINT: consider the EndsWith() method, also you will need to adjust the View and ViewModel)
+            //Author's Last Name Search
             if (search.AuthorLastName != null)
             {
                 //TODO:Update to use the Name property of the Book's Author entity
                 foundBooks = foundBooks
-                        .Where(b => b.Author.EndsWith(search.AuthorLastName, StringComparison.CurrentCulture));
+                             .Where(b => b.Author.EndsWith(search.AuthorLastName, StringComparison.CurrentCulture))
+                             ;
             }
-            //Filter the collection by price between a low and high value, if given
-            //       order results by descending price 
-            // (Note: you will need to adjust the ViewModel and View to add search fields)
-            if (search.MinPrice > 0 && search.MaxPrice>0)
+            //Priced Between Search (min and max price entered)
+            if (search.MinPrice > 0 && search.MaxPrice > 0)
             {
                 foundBooks = foundBooks
-                        .Where(b => b.Price>=search.MinPrice && b.Price<=search.MaxPrice)
-                    .OrderByDescending(b=>b.Price);
+                             .Where(b => b.Price >= search.MinPrice && b.Price <= search.MaxPrice)
+                             .OrderByDescending(b => b.Price)
+                             ;
             }
+            //Highest Priced Book Search (only max price entered)
+            if (search.MinPrice == 0 && search.MaxPrice > 0)
+            {
+                decimal max = _db.Books.Max(b => b.Price);
+                foundBooks = foundBooks
+                             ;
 
+            }
+            //Composite Search Results
             return View("SearchResults", foundBooks);
         }
     }

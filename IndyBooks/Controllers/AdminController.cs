@@ -18,20 +18,32 @@ namespace IndyBooks.Controllers
          * CREATE
          */
         [HttpGet]
-        public IActionResult CreateBook() => View("AddBook");
+        public IActionResult CreateBook()
+        {
+            //TODO: create a new AddBookViewModel with the full list of Writers from the Db
+            AddBookViewModel EmptyVMwriterList = new AddBookViewModel { WritersList = _db.Writers.ToList() };
+            return View("AddBook", EmptyVMwriterList);
+        }
         [HttpPost]
         public IActionResult CreateBook(AddBookViewModel newBook)
         {
-            //TODO: Use ViewModel to build the Author and then the Book; 
+            //TODO: Use ViewModel to build the Writer and then the Book; 
             //      Add to DbSets; SaveChanges
-
-
+            Writer author = _db.Writers.Single(w=> w.Id == newBook.AuthorId);
+            Book book = new Book
+            {
+                Title = newBook.Title,
+                SKU = newBook.SKU,
+                Price = newBook.Price,
+                Author = author
+            };
+            _db.Books.Add(book);
+            _db.SaveChanges();
             //Shows the new book using the Search Listing 
             return RedirectToAction("Index");
         }
         /***
-         * READ
-         * TODO: Note the use of a Lambda expression in the method definition        
+         * READ       
          */
         [HttpGet]
         public IActionResult Index() => View("SearchResults", _db.Books.Include(b => b.Author));
@@ -41,8 +53,10 @@ namespace IndyBooks.Controllers
         [HttpGet]
         public IActionResult DeleteBook(long id)
         {
-            //TODO: Remove the Book associated with the given id number; Save Changes
-
+            //Remove the Book associated with the given id number; Save Changes
+            Book book = new Book { Id = id };
+            _db.Books.Remove(book);
+            _db.SaveChanges();
 
             return RedirectToAction("Search");
         }
@@ -52,8 +66,8 @@ namespace IndyBooks.Controllers
         [HttpPost]
         public IActionResult Search(SearchViewModel search)
         {
-            //Full Collection Search
-            IQueryable<Book> foundBooks = _db.Books; // start with entire collection
+            //Full Collection Search - start with entire collection
+            IQueryable<Book> foundBooks = _db.Books.OrderBy(b=>b.SKU); 
 
             //Partial Title Search
             if (search.Title != null)

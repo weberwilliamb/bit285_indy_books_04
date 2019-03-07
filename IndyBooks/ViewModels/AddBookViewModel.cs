@@ -1,18 +1,16 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using IndyBooks.Models;
 
-namespace IndyBooks.Models
+namespace IndyBooks.ViewModels
 {
-    public class Book
+    public class AddBookViewModel
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string SKU { get; set; }
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
-
-        //Navigtion Property according to ERD Diagram
-        public Writer Author { get; set; }
-
+        [Display(Name = "Author Name")]
+        public String Name { get; set; }
     }
 }

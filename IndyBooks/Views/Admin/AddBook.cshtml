@@ -18,7 +18,7 @@
     <div>
         <label asp-for="@Model.Name"></label>
         <select asp-for="AuthorId"
-                asp-items="@(new SelectList(Model.WritersList,"Id","Name"))">
+                asp-items="@(new SelectList(Model.Writers,"Id","Name"))">
             <option>Please select one</option>
         </select>
         OR enter new Author: <input asp-for="@Model.Name" />

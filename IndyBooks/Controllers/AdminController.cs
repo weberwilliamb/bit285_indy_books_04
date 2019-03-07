@@ -21,14 +21,13 @@ namespace IndyBooks.Controllers
         public IActionResult CreateBook()
         {
             //TODO: create a new AddBookViewModel with the full list of Writers from the Db
-            AddBookViewModel EmptyVMwriterList = new AddBookViewModel { WritersList = _db.Writers.ToList() };
-            return View("AddBook", EmptyVMwriterList);
+            AddBookViewModel VmWithWriters = new AddBookViewModel { Writers = _db.Writers };
+            return View("AddBook", VmWithWriters);
         }
         [HttpPost]
         public IActionResult CreateBook(AddBookViewModel newBook)
         {
-            //Use ViewModel to build the Writer and then the Book; 
-            //      Add to DbSets; SaveChanges
+            //Use ViewModel to build the Writer and then the Book; Add to DbSets; SaveChanges
             Writer author;
             if (newBook.AuthorId > 0)
             {

@@ -27,9 +27,17 @@ namespace IndyBooks.Controllers
         [HttpPost]
         public IActionResult CreateBook(AddBookViewModel newBook)
         {
-            //TODO: Use ViewModel to build the Writer and then the Book; 
+            //Use ViewModel to build the Writer and then the Book; 
             //      Add to DbSets; SaveChanges
-            Writer author = _db.Writers.Single(w=> w.Id == newBook.AuthorId);
+            Writer author;
+            if (newBook.AuthorId > 0)
+            {
+                author = _db.Writers.Single(w => w.Id == newBook.AuthorId);
+            }
+            else
+            {
+                author = new Writer { Name = newBook.Name };
+            }
             Book book = new Book
             {
                 Title = newBook.Title,
@@ -46,7 +54,8 @@ namespace IndyBooks.Controllers
          * READ       
          */
         [HttpGet]
-        public IActionResult Index() => View("SearchResults", _db.Books.Include(b => b.Author));
+        public IActionResult Index() => 
+                View("SearchResults", _db.Books.Include(b => b.Author).OrderBy(b=>b.SKU));
         /***
          * DELETE
          */
@@ -67,7 +76,7 @@ namespace IndyBooks.Controllers
         public IActionResult Search(SearchViewModel search)
         {
             //Full Collection Search - start with entire collection
-            IQueryable<Book> foundBooks = _db.Books.OrderBy(b=>b.SKU); 
+            IQueryable<Book> foundBooks = _db.Books.OrderBy(b => b.SKU);
 
             //Partial Title Search
             if (search.Title != null)

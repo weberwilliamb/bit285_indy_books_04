@@ -14,7 +14,7 @@ namespace IndyBooks.ViewModels
         [Display(Name = "Author Name")]
         public String Name { get; set; }
 
-        //TODO: Add properties to support a Writer's SelectList (Id and WritersList)
+        //Properties to support a Writer's SelectList (Id and WritersList)
         public long AuthorId { get; set; }
         public IEnumerable<Writer> Writers { get; set; }
     }

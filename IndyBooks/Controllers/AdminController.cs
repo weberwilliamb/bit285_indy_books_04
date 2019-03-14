@@ -20,7 +20,7 @@ namespace IndyBooks.Controllers
         [HttpGet]
         public IActionResult CreateBook()
         {
-            //TODO: create a new AddBookViewModel with the full list of Writers from the Db
+            //create a new AddBookViewModel with the full list of Writers from the Db
             AddBookViewModel VmWithWriters = new AddBookViewModel { Writers = _db.Writers };
             return View("AddBook", VmWithWriters);
         }

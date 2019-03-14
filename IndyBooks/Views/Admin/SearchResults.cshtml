@@ -34,8 +34,8 @@
             <td>
                 @book.Title
             </td>
-            <td>
-                <!-- Use the Name property of the Book's Author entity-->
+            <td data-id="@book.Author.Id">
+                <!-- Use jQuery AJAX to call our API and get the book count-->
                 @book.Author.Name
             </td>
             <td class="rightedge">
@@ -52,5 +52,24 @@
     }
 
 </table>
-
+<script>/*
+    jQuery tooltip provides the hover effect,
+    AJAX call to '/api/writer/{id}' gets the JSON data
+    for the book count for the given author id
+ */
+$( function() {
+    $( document ).tooltip({
+        items:"[data-id]",
+        content:function(){
+            if(this.attributes.length<=2){
+                var id = this.attributes["data-id"].nodeValue;
+                // JSON call to our REST API route
+                $.getJSON('/api/writer/bookcount/'+id, function(item) {
+                    $("[data-id ="+id+"]")
+                        .attr('title', 'number of books: '+ item[0].count);
+                });
+            }
+        }
+    });
+ });</script>
 
